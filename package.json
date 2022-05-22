@@ -1,0 +1,19 @@
+{
+  "name": "@r2n/dst",
+  "version": "0.0.0",
+  "description": "R2N Design System Token Definitions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andres-artunduaga/r2n-dst.git"
+  },
+  "author": "Andres Artunduaga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andres-artunduaga/r2n-dst/issues"
+  },
+  "homepage": "https://github.com/andres-artunduaga/r2n-dst#readme"
+}
