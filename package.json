@@ -1,6 +1,6 @@
 {
   "name": "@r2n/dst",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "R2N Design System Token Definitions",
   "main": "index.js",
   "scripts": {
