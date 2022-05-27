@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://r2n.dev/dst/schemas/dst.schema.json",
+    "title": "DST Definition",
+    "description": "R2N DST Definitions",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["$schema", "metadata", "definition"],
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "metadata": {
+            "description": "Metadata",
+            "type": "object"
+        },
+        "definition": {
+            "description": "Design System Token Definition",
+            "type": "object",
+            "properties": {
+                "ref": {
+                    "type": "object",
+                    "description": "Static values such as colors, typography sizes, spacing",
+                    "properties": {
+                        "palette": {
+                            "type": "object",
+                            "description": "Color definitions",
+                            "patternProperties": {
+                                "*": {
+                                    "type": "object",
+                                    "patternProperties": {
+                                        "*": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "typeface": {
+                            "type": "object",
+                            "description": "Place here the color definitions",
+                            "patternProperties": {
+                                "*": {
+                                    "type": "object",
+                                    "properties": {
+                                        "family": {
+                                            "description": "Font family",
+                                            "type": "string"
+                                        },
+                                        "weight": {
+                                            "type": "object",
+                                            "description": "Weights available for this facetype",
+                                            "patternProperties": {
+                                                "*": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "box-shadow": {
+                            "type": "object",
+                            "description": "Describe box shadow variables"
+                        },
+                        "breakpoints": {
+                            "type": "object",
+                            "description": "Screen breakpoints for responsive management",
+                            "patternProperties": {
+                                "*": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "border-radius": {
+                            "type": "object",
+                            "description": "Define border radius values for your components  // TODO: Should this be here?"
+                        },
+                        "spacing": {
+                            "type": "object",
+                            "description": "Define spacing // TODO: Should this be here?"
+                            
+                        }
+                    }
+                },
+                "sys": {
+                    "type": "object",
+                    "description": "System values, can be variable, might change depending on theme or any other factor, can be used to abstract theme semantic colors (plain, secondary, etc)"
+                },
+                "comp": {
+                    "type": "object",
+                    "description": "Component specific value properties",
+                    "properties": {}
+                }
+            }
+        }
+    }
+}
