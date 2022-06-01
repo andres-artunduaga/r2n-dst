@@ -10,14 +10,14 @@
         "namespace": "r2n"
     },
     "definition": {
-        "&[ref": {
+        "ref": {
             "palette": {
                 "black": {
                     "value": "hsl(0,0,0)",
                     "contrast": "&[ref.palette.white.value]"
                 },
                 "white": {
-                    "value": "hsl(0,0,0)",
+                    "value": "hsl(0,0,100)",
                     "contrast": "&[ref.palette.black.value]"
                 },
                 "gray": {
@@ -93,6 +93,44 @@
                     },
                     "90": {
                         "value": "hsl(221, 51, 90)",
+                        "contrast": "&[ref.palette.black.value]"
+                    }
+                },
+                "orange": {
+                    "10": {
+                        "value": "hsl(37, 98, 10)",
+                        "contrast": "&[ref.palette.black.value]"
+                    },
+                    "20": {
+                        "value": "hsl(37, 98, 20)",
+                        "contrast": "&[ref.palette.black.value]"
+                    },
+                    "30": {
+                        "value": "hsl(37, 98, 30)",
+                        "contrast": "&[ref.palette.black.value]"
+                    },
+                    "40": {
+                        "value": "hsl(37, 98, 40)",
+                        "contrast": "&[ref.palette.black.value]"
+                    },
+                    "50": {
+                        "value": "hsl(37, 98, 50)",
+                        "contrast": "&[ref.palette.black.value]"
+                    },
+                    "60": {
+                        "value": "hsl(37, 98, 60)",
+                        "contrast": "&[ref.palette.black.value]"
+                    },
+                    "70": {
+                        "value": "hsl(37, 98, 70)",
+                        "contrast": "&[ref.palette.black.value]"
+                    },
+                    "80": {
+                        "value": "hsl(37, 98, 80)",
+                        "contrast": "&[ref.palette.black.value]"
+                    },
+                    "90": {
+                        "value": "hsl(37, 98, 90)",
                         "contrast": "&[ref.palette.black.value]"
                     }
                 },
