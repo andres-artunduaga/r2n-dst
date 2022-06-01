@@ -240,6 +240,26 @@
             },
             "box-shadow": {
                 "sm": "0 1px 2px 0 &[ref.palette.red.500]"
+            },
+            "space": {
+                "xxs": "4px",
+                "xs": "8px",
+                "sm": "12px",
+                "base": "16px",
+                "md": "20px",
+                "lg": "32px",
+                "xl": "52px",
+                "xxl": "84px"
+            },
+            "emspace": {
+                "xxs": "calc(0.25 * &[ref.emspace.base])",
+                "xs": "calc(0.5 * &[ref.emspace.base])",
+                "sm": "calc(0.75 * &[ref.emspace.base])",
+                "base": "1em",
+                "md": "calc(1.25 * &[ref.emspace.base])",
+                "lg": "calc(2 * &[ref.emspace.base])",
+                "xl": "calc(3.25 * &[ref.emspace.base])",
+                "xxl": "calc(5.25 * &[ref.emspace.base])"
             }
         },
         "sys": {

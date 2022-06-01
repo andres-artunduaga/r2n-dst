@@ -73,20 +73,30 @@
                                 }
                             }
                         },
-                        "border-radius": {
+                        "space": {
                             "type": "object",
-                            "description": "Define border radius values for your components  // TODO: Should this be here?"
+                            "description": "Spacing based on px",
+                            "patternProperties": {
+                                "*": {
+                                    "type": "string"
+                                }
+                            }
                         },
-                        "spacing": {
+                        "emspace": {
                             "type": "object",
-                            "description": "Define spacing // TODO: Should this be here?"
-                            
+                            "description": "Spacing based on em",
+                            "patternProperties": {
+                                "*": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 },
                 "sys": {
                     "type": "object",
-                    "description": "System values, can be variable, might change depending on theme or any other factor, can be used to abstract theme semantic colors (plain, secondary, etc)"
+                    "description": "System values, can be variable, might change depending on theme or any other factor, can be used to abstract theme semantic colors (plain, secondary, etc)",
+                    "properties": { }
                 },
                 "comp": {
                     "type": "object",
