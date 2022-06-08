@@ -27,9 +27,15 @@
                             "description": "Color definitions",
                             "patternProperties": {
                                 "*": {
-                                    "type": "object",
-                                    "patternProperties": {
-                                        "*": {
+                                    "description": "Color Definition",
+                                    "type": "string",
+                                    "required": ["value", "contrast"],
+                                    "properties": {
+                                        "value": {
+                                            "description": "value",
+                                            "type": "string"
+                                        },
+                                        "contrast": {
                                             "type": "string"
                                         }
                                     }
@@ -96,7 +102,26 @@
                 "sys": {
                     "type": "object",
                     "description": "System values, can be variable, might change depending on theme or any other factor, can be used to abstract theme semantic colors (plain, secondary, etc)",
-                    "properties": { }
+                    "properties": {
+                        "color": {
+                            "description": "System color definitions",
+                            "type": "object",
+                            "patternProperties": {
+                                "*": {
+                                    "type": "object",
+                                    "required": ["value", "contrast"],
+                                    "properties": {
+                                        "value": {
+                                            "type": "string"
+                                        },
+                                        "contrast": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        } 
+                    }
                 },
                 "comp": {
                     "type": "object",
