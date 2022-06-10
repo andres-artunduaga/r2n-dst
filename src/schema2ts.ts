@@ -30,7 +30,6 @@ function generateTypes(filePath?: string, outputPath?: string) {
 
 function main() {
     const args = minimist(process.argv);
-    console.log('📢[schema2ts.ts:33]: ', args);
     const { i, o } = args;
     if (i && o) {
         let outputFolder = path.resolve(__dirname, path.dirname(o));
