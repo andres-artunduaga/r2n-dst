@@ -1,8 +1,3 @@
-// Based on material design v3 design tokens
-// ref.* -> Static values such as colors, typography sizes, spacing
-// sys.* -> system values, can be variable, might change depending on theme or any other factor, can be used to abstract theme semantic colors (plain, secondary, etc)
-// comp.* -> component specific value properties
-
 {
     "$schema": "../schema/dst.schema.json",
     "metadata": {
