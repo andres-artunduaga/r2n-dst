@@ -2,10 +2,8 @@
   "name": "@r2n/dst",
   "version": "0.0.7",
   "description": "R2N Design System Token Definitions",
-  "main": "index.js",
   "bin": {
-    "dstschema2ts": "./src/schema2ts.js",
-    "dstcptheme": "./src/copytheme.js"
+    "r2ndst": "./src/index.js"
   },
   "scripts": {
     "clean": "rimraf types",
@@ -33,6 +31,7 @@
     "rimraf": "^3.0.2"
   },
   "dependencies": {
+    "chalk": "^5.0.1",
     "findup-sync": "^5.0.0",
     "fs-extra": "^10.1.0",
     "json-schema-to-typescript": "^10.1.5",

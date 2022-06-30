@@ -63,6 +63,7 @@ function main() {
     // Replace $schema using the relative path to the schema
     themeFile['$schema'] = getSchemaPath(DESTINATION);
     themeFile['metadata']['namespace'] = NAMESPACE;
+    console.log("📢[copytheme.js:65]: themeFile['metadata']['namespace']", themeFile['metadata']['namespace']);
 
     // Create destination directory if it does not exists
     if (!fs.existsSync(DESTINATION_DIR_PATH)) {
