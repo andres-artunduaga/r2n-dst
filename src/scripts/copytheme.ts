@@ -47,7 +47,7 @@ function getDestinationPath(destination = './') {
     return path.resolve(destination);
 }
 
-function main() {
+function copytheme() {
     const args = minimist(process.argv);
 
     const { theme, dest, ns } = args;
@@ -77,4 +77,6 @@ function main() {
     fs.writeFileSync(DESTIONATION_FILE_PATH, JSON.stringify(themeFile, null, 4));
 }
 
-main();
+export {
+    copytheme
+}

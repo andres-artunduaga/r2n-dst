@@ -1,6 +1,4 @@
 import chalk from 'chalk';
-import { error } from 'console';
-// const chalk = require('chalk');
 
 type Level = 'debug' | 'info' | 'success' | 'error' | 'warning';
 type LevelColor = 'gray' | 'blue' | 'green' | 'red' | 'yellow';
@@ -39,32 +37,38 @@ export class Logger {
         return levelInformation[level];
     }
 
-    private withPrefix(level: Level, message: string) {
-        let { prefix, color } = this.getLevelInformation(level);
-        return chalk.keyword(color)(chalk.bold(`[${prefix}]  \n └`), message);
+    private withPrefix(message: string, level?: Level) {
+        let msg: string;
+        if (level) {
+            let { prefix, color } = this.getLevelInformation(level);
+            msg = chalk.keyword(color)(chalk.bold(`[${prefix}]  \n └`), message);
+        } else {
+            msg = chalk(message);
+        }
+        return msg;
     }
 
-    log(level: Level, message: string, ...optionalParams: any[]): void {
-        console.log(this.withPrefix(level, message), ...optionalParams);
+    log(message: string, level?: Level, ...optionalParams: any[]): void {
+        console.log(this.withPrefix(message, level), ...optionalParams);
     }
 
     info(message: string, ...optionalParams: any[]) {
-        this.log('info' ,message, ...optionalParams);
+        this.log(message, 'info', ...optionalParams);
     }
 
     success(message: string, ...optionalParams: any[]) {
-        this.log('success', message, ...optionalParams);
+        this.log(message, 'success', ...optionalParams);
     }
 
     error(message: string, ...optionalParams: any[]) {
-        this.log('error', message, ...optionalParams);
+        this.log(message, 'error', ...optionalParams);
     }
 
     warn(message: string, ...optionalParams: any[]) {
-        this.log('warning', message, ...optionalParams);
+        this.log(message, 'warning', ...optionalParams);
     }
 
     debug(message: string, ...optionalParams: any[]) {
-        this.log('debug', message, ...optionalParams);
+        this.log(message, 'debug', ...optionalParams);
     }
 }
