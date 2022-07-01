@@ -3,7 +3,7 @@
   "version": "0.0.7",
   "description": "R2N Design System Token Definitions",
   "bin": {
-    "r2ndst": "./src/index.js"
+    "r2ndst": "dist/index.js"
   },
   "scripts": {
     "clean": "rimraf types",
@@ -13,7 +13,6 @@
   },
   "files": [
     "dist",
-    "src",
     "types",
     "themes"
   ],
