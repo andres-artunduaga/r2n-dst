@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-const jsonSchema2TS = require('json-schema-to-typescript');
-const fs = require('fs');
-const path = require('path');
-const minimist = require('minimist');
+// const jsonSchema2TS = require('json-schema-to-typescript');
+import { compileFromFile } from 'json-schema-to-typescript';
+import path from 'path';
+import fs from 'fs-extra';
+import minimist from 'minimist';
 
 const DEFAULT_DST_SCHEMA = '../schema/dst.schema.json';
 const DEFAULT_OUTPUT_FILE = '../types/dst.d.ts';
@@ -13,14 +14,14 @@ const DEFAULT_OUTPUT_FILE = '../types/dst.d.ts';
  * @param file Path to the file
  * @param output Path to the output
  */
-function generateTypes(filePath, outputPath) {
+function generateTypes(filePath?: string, outputPath?: string) {
     const DST_FILE_PATH = filePath ?? DEFAULT_DST_SCHEMA;
     const TS_OUTPUT_PATH = outputPath ?? DEFAULT_OUTPUT_FILE;
     const PATH_INPUT = path.resolve(__dirname, DST_FILE_PATH);
     const PATH_OUTPUT = path.resolve(__dirname, `${TS_OUTPUT_PATH}`);
 
     // Compile using json-schema-to-typescript lib
-    jsonSchema2TS.compileFromFile(PATH_INPUT).then((ts) => fs.writeFileSync(PATH_OUTPUT, ts));
+    compileFromFile(PATH_INPUT).then((ts) => fs.writeFileSync(PATH_OUTPUT, ts));
 }
 
 function main() {

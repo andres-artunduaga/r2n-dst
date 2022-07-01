@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra');
-const path = require('path');
-const minimist = require('minimist');
-const findup = require('findup-sync');
+import path from 'path';
+import fs from 'fs-extra';
+import findupSync from 'findup-sync';
+import minimist from 'minimist';
 
 /**
  * Creates the $schema path from where the theme file is created
  * @param {string} destination relative path to destination folder
  * @returns string
  */
-function getSchemaPath(destination) {
-    const NODE_MODULES_DIR_PATH = findup('node_modules', { cwd: path.resolve('./') });
+function getSchemaPath(destination: string) {
+    const NODE_MODULES_DIR_PATH = findupSync('node_modules', { cwd: path.resolve('./') });
     const R2N_DST_SCHEMA_PATH = '@r2n/dst/schema/dst.schema.json';
     return path.relative(destination, `${NODE_MODULES_DIR_PATH}/${R2N_DST_SCHEMA_PATH}`);
 }
@@ -21,7 +21,7 @@ function getSchemaPath(destination) {
  * @param {string} themeName
  * @returns theme object
  */
-function getSchemaFileObj(themeName = 'default') {
+function getSchemaFileObj(themeName: string = 'default') {
     let themeFileName = getThemeFileName(themeName);
     let themesPath = path.resolve(__dirname, '../themes/');
     let themeFilePath = path.resolve(themesPath, themeFileName);
@@ -34,7 +34,7 @@ function getSchemaFileObj(themeName = 'default') {
  * @param {*} themeName theme name
  * @returns string
  */
-function getThemeFileName(themeName = 'default') {
+function getThemeFileName(themeName:string = 'default') {
     return `${themeName}.dst.json`;
 }
 
@@ -63,7 +63,10 @@ function main() {
     // Replace $schema using the relative path to the schema
     themeFile['$schema'] = getSchemaPath(DESTINATION);
     themeFile['metadata']['namespace'] = NAMESPACE;
-    console.log("📢[copytheme.js:65]: themeFile['metadata']['namespace']", themeFile['metadata']['namespace']);
+    console.log(
+        "📢[copytheme.js:65]: themeFile['metadata']['namespace']",
+        themeFile['metadata']['namespace']
+    );
 
     // Create destination directory if it does not exists
     if (!fs.existsSync(DESTINATION_DIR_PATH)) {
