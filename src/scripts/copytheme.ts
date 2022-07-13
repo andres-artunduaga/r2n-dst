@@ -12,7 +12,7 @@ import minimist from 'minimist';
  */
 function getSchemaPath(destination: string) {
     const NODE_MODULES_DIR_PATH = findupSync('node_modules', { cwd: path.resolve('./') });
-    const R2N_DST_SCHEMA_PATH = '@r2n/dst/schema/dst.schema.json';
+    const R2N_DST_SCHEMA_PATH = '@r2n/dst/dst/schema/dst.schema.json';
     return path.relative(destination, `${NODE_MODULES_DIR_PATH}/${R2N_DST_SCHEMA_PATH}`);
 }
 
@@ -23,7 +23,7 @@ function getSchemaPath(destination: string) {
  */
 function getSchemaFileObj(themeName: string = 'default') {
     let themeFileName = getThemeFileName(themeName);
-    let themesPath = path.resolve(__dirname, '../themes/');
+    let themesPath = path.resolve(__dirname, '../dst/themes/');
     let themeFilePath = path.resolve(themesPath, themeFileName);
     let themeFile = require(themeFilePath);
     return themeFile;
