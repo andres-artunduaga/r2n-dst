@@ -6,15 +6,13 @@
     "r2ndst": "dist/index.js"
   },
   "scripts": {
-    "clean": "rimraf types",
+    "clean": "rimraf dist",
     "prebuild": "yarn clean",
-    "build": "tsc",
+    "build": "tsc && cp -r dst dist/dst",
     "prepack": "yarn build"
   },
   "files": [
-    "dist",
-    "types",
-    "themes"
+    "dist"
   ],
   "repository": {
     "type": "git",
