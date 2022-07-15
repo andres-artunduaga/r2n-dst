@@ -16,9 +16,8 @@ const DEFAULT_THEME = 'default';
 const DEFAULT_SCHEMA_FILE_PATH = `${DEFAULT_SCHEMA_DIR}/${DEFAULT_SCHEMA_FILE_NAME}`;
 
 const log = new Logger();
-// ----------------------------------------------------------------------------------------------------
 
-function getThemeFileName(theme: string) {
+function getThemeFileName(theme: string): string {
     return `${theme}.dst.json`;
 }
 
@@ -26,7 +25,7 @@ function getSchemaFileName() {
     return 'dst.schema.json';
 }
 
-function getThemeFilePath(theme: string) {
+function getThemeFilePath(theme: string): string {
     return `${DEFAULT_THEMES_DIR}/${getThemeFileName(theme)}`;
 }
 
@@ -90,7 +89,6 @@ function copyTheme(destination: string = CURRENT_DIR, theme: string = DEFAULT_TH
     }
 }
 
-
 function revertChanges(destination = CURRENT_DIR) {
     log.info('Reverting changes...');
     let dest = path.resolve(destination);
@@ -105,11 +103,9 @@ function setup(args: minimist.ParsedArgs) {
     let { init, destination, theme } = args;
     try {
         if (init) {
-            if (destination) {
-                log.info('Using custom destination', destination);
-                copySchema(destination);
-                copyTheme(destination, theme);
-            }
+            log.info('Using custom destination', destination);
+            copySchema(destination);
+            copyTheme(destination, theme);
         }
     } catch (e) {
         if (e instanceof Error) {
