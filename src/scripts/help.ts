@@ -1,24 +1,33 @@
 import { Tabulator } from '../utils/tabulator';
 
-type HelpItem = {
+export type HelpItem = {
     options: string;
     description?: string;
+    usage?: string;
 };
 
 function getHelpItems(): HelpItem[] {
     return [
         {
-            options: '-g,--generate',
-            description: 'Generate DST file',
+            options: '--init',
+            description: 'Generate empty DST file unless used with --theme',
         },
         {
-            options: '-h,--help',
+            options: '--destination',
+            description: 'Place where the files are gonna be created',
+        },
+        {
+            options: '--with-schema',
+            description: 'Creates a copy of the schema that can be modified',
+        },
+        {
+            options: '--help',
             description: 'Display this information',
         },
         {
-            options: '-t,--theme',
-            description: 'Select theme',
-        },
+            options: '--theme',
+            description: 'Add themes',
+        }
     ];
 }
 
@@ -28,4 +37,4 @@ function showHelp() {
     table.print();
 }
 
-export { showHelp };
+export { showHelp, getHelpItems };
