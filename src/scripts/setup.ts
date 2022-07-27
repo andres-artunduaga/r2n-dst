@@ -36,6 +36,14 @@ function createDir(dirPath: string): void {
     }
 }
 
+function createFile(filePath: string, data: any): void {
+    if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
+    } else {
+        log.warn(`File [ ${filePath} ] already exists, skipping file creation...`);
+    }
+}
+
 function getSchemaDestinationPath(destination = CURRENT_DIR) {
     return path.resolve(destination, DEFAULT_SCHEMA_DIR);
 }
@@ -63,10 +71,10 @@ function copySchema(destination: string = CURRENT_DIR) {
         log.info('Copying schema...');
         const dest = getSchemaDestinationPath(destination);
         createDir(dest);
-        fs.writeFileSync(
-            `${dest}/${DEFAULT_SCHEMA_FILE_NAME}`,
-            JSON.stringify(getSchemaFileObj(), null, 4)
-        );
+        const schemaObj = getSchemaFileObj();
+        if (schemaObj) {
+            createFile(`${dest}/${DEFAULT_SCHEMA_FILE_NAME}`, schemaObj);
+        }
     } catch (e) {
         throw new Error('Unable to copy schema file');
     }
@@ -79,10 +87,7 @@ function copyTheme(destination: string = CURRENT_DIR, theme: string = DEFAULT_TH
         createDir(dest);
         const themeObject = getThemeFileObj(theme);
         if (themeObject) {
-            fs.writeFileSync(
-                `${dest}/${getThemeFileName(theme)}`,
-                JSON.stringify(themeObject, null, 4)
-            );
+            createFile(`${dest}/${getThemeFileName(theme)}`, themeObject);
         }
     } catch (e) {
         throw new Error('Unable to copy theme file');
