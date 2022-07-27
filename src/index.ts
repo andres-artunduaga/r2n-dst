@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import minimist from 'minimist';
-import { getHelpItems, HelpItem } from './scripts/help';
+import { getHelpItems, HelpItem, showHelp } from './scripts/help';
 import { setup } from './scripts/setup';
 import { Logger } from './utils/logger';
 
@@ -30,7 +30,12 @@ function validArgs(args: minimist.ParsedArgs): boolean {
 
 function main(): void {
     const args = minimist(process.argv);
-    const { init } = args;
+    const { init, help } = args;
+    if(help){
+        log.info("using --help option, other flags will be ignored...");
+        showHelp();
+        return;
+    }
     if (validArgs(args)) {
         if (init) {
             setup(args);

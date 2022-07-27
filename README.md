@@ -8,4 +8,10 @@ This package will create an schema and some example themes that can be used to d
 
 ## How to install
 
-`npm i @r2n/dst`
+`yarn add @r2n/dst`
+
+## Develop
+
+Run `yarn dst --help` to see options
+
+Run option `yarn dst [options]`

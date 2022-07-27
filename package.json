@@ -9,7 +9,8 @@
     "clean": "rimraf dist",
     "prebuild": "yarn clean",
     "build": "tsc && cp -r dst dist/dst",
-    "prepack": "yarn build"
+    "prepack": "yarn build",
+    "dst": "yarn build && node ./dist/index.js"
   },
   "files": [
     "dist"
