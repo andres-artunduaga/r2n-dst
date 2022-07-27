@@ -25,6 +25,17 @@ function getSchemaFileName() {
     return 'dst.schema.json';
 }
 
+/**
+ * Creates the $schema path from where the theme file is created
+ * @param {string} destination relative path to destination folder
+ * @returns string
+ */
+ function getNodeSchemaPath(destination: string) {
+    const NODE_MODULES_DIR_PATH = findupSync('node_modules', { cwd: path.resolve('./') });
+    const R2N_DST_SCHEMA_PATH = '@r2n/dst/schema/dst.schema.json';
+    return path.relative(destination, `${NODE_MODULES_DIR_PATH}/${R2N_DST_SCHEMA_PATH}`);
+}
+
 function getThemeFilePath(theme: string): string {
     return `${DEFAULT_THEMES_DIR}/${getThemeFileName(theme)}`;
 }
@@ -88,6 +99,8 @@ function copyTheme(destination: string = CURRENT_DIR, theme: string = DEFAULT_TH
         createDir(dest);
         const themeObject = getThemeFileObj(theme);
         // TOOD: override data if necessary
+        themeObject['$schema'] = getNodeSchemaPath(destination)
+        console.log(themeObject);
         if (themeObject) {
             createFile(`${dest}/${getThemeFileName(theme)}`, themeObject);
         }
