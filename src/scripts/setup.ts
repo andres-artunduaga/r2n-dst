@@ -92,14 +92,16 @@ function copySchema(destination: string = CURRENT_DIR) {
     }
 }
 
-function copyTheme(destination: string = CURRENT_DIR, theme: string = DEFAULT_THEME) {
+function copyTheme(destination: string = CURRENT_DIR, theme: string = DEFAULT_THEME, schema?: boolean) {
     try {
         log.info('Copying theme...');
         const dest = getThemeDestinationPath(destination);
         createDir(dest);
         const themeObject = getThemeFileObj(theme);
         // TOOD: override data if necessary
-        themeObject['$schema'] = getNodeSchemaPath(destination)
+        if(!schema){ // Only override schema if schema is not copied
+            themeObject['$schema'] = getNodeSchemaPath(destination)
+        }
         console.log(themeObject);
         if (themeObject) {
             createFile(`${dest}/${getThemeFileName(theme)}`, themeObject);
@@ -126,7 +128,7 @@ function setup(args: minimist.ParsedArgs) {
             if (destination) {
                 log.info('Using custom destination', destination);
             }
-            copyTheme(destination, theme);
+            copyTheme(destination, theme, schema);
             if (schema) {
                 copySchema(destination);
             }

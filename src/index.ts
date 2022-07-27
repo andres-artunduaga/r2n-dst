@@ -44,7 +44,7 @@ function main(): void {
             return;
         }
         if (theme) {
-            copyTheme(destination, theme);
+            copyTheme(destination, theme, schema);
             log.success('Completed!');
             return;
         }
