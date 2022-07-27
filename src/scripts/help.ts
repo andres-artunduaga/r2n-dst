@@ -17,7 +17,7 @@ function getHelpItems(): HelpItem[] {
             description: 'Place where the files are gonna be created',
         },
         {
-            options: '--with-schema',
+            options: '--schema',
             description: 'Creates a copy of the schema that can be modified',
         },
         {

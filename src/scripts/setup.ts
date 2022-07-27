@@ -38,6 +38,7 @@ function createDir(dirPath: string): void {
 
 function createFile(filePath: string, data: any): void {
     if (!fs.existsSync(filePath)) {
+        log.info(`Creating file`, filePath);
         fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
     } else {
         log.warn(`File [ ${filePath} ] already exists, skipping file creation...`);
@@ -86,11 +87,12 @@ function copyTheme(destination: string = CURRENT_DIR, theme: string = DEFAULT_TH
         const dest = getThemeDestinationPath(destination);
         createDir(dest);
         const themeObject = getThemeFileObj(theme);
+        // TOOD: override data if necessary
         if (themeObject) {
             createFile(`${dest}/${getThemeFileName(theme)}`, themeObject);
         }
     } catch (e) {
-        throw new Error('Unable to copy theme file');
+        throw new Error('Unable to copy theme file, verify the theme name is correct');
     }
 }
 
@@ -105,12 +107,16 @@ function revertChanges(destination = CURRENT_DIR) {
 
 function setup(args: minimist.ParsedArgs) {
     log.info('Initializing DST files');
-    let { init, destination, theme } = args;
+    let { init, destination, theme, schema } = args;
     try {
         if (init) {
-            log.info('Using custom destination', destination);
-            copySchema(destination);
+            if (destination) {
+                log.info('Using custom destination', destination);
+            }
             copyTheme(destination, theme);
+            if (schema) {
+                copySchema(destination);
+            }
         }
     } catch (e) {
         if (e instanceof Error) {
@@ -123,4 +129,4 @@ function setup(args: minimist.ParsedArgs) {
     }
 }
 
-export { setup };
+export { setup, copyTheme, copySchema };
