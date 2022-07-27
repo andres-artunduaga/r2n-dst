@@ -32,8 +32,8 @@ function getSchemaFileName() {
  */
  function getNodeSchemaPath(destination: string) {
     const NODE_MODULES_DIR_PATH = findupSync('node_modules', { cwd: path.resolve('./') });
-    const R2N_DST_SCHEMA_PATH = '@r2n/dst/schema/dst.schema.json';
-    return path.relative(destination, `${NODE_MODULES_DIR_PATH}/${R2N_DST_SCHEMA_PATH}`);
+    const R2N_DST_SCHEMA_PATH = '@r2n/dst/dist/dst/schema/dst.schema.json';
+    return path.relative(`${destination}/${DEFAULT_SCHEMA_DIR}`, `${NODE_MODULES_DIR_PATH}/${R2N_DST_SCHEMA_PATH}`);
 }
 
 function getThemeFilePath(theme: string): string {
