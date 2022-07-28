@@ -83,7 +83,8 @@ export class Tabulator {
         }
 
         Object.keys(this.dimentions).forEach((k: string, idx: number, arr: string[]) => {
-            rowMid += `${this.centerText(item[k], this.dimentions[k], chalk.yellow)}`;
+            const itemValue = item[k] ?? "";
+            rowMid += `${this.centerText(itemValue, this.dimentions[k], chalk.yellow)}`;
             rowBot += `${this.TABLE_BLOCKS.HORIZONTAL.repeat(this.dimentions[k])}`;
             if (idx === arr.length - 1) {
                 rowMid += `${this.TABLE_BLOCKS.VERTICAL}`;
