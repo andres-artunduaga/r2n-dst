@@ -24,6 +24,9 @@ function getValueFromObject(obj: any, dotProps: string): string {
             return '';
         }
     } else {
+        if(typeof _obj !== "string"){
+            throw Error(`Error while trying to get reference`);
+        }
         return _obj;
     }
 }
