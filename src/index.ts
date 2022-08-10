@@ -31,8 +31,9 @@ function validArgs(args: minimist.ParsedArgs): boolean {
 
 function main(): void {
     const args = minimist(process.argv);
-    log.debug("ARGS", args);
+
     const { init, help, theme, destination, schema, toJson, source, filename } = args;
+
     if (validArgs(args)) {
         if (help) {
             log.info('Using --help option, other flags will be ignored...');

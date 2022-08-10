@@ -17,7 +17,12 @@ function getValueFromObject(obj: any, dotProps: string): string {
     const props = dotProps.split('.');
     const prop = props.shift();
     if (prop) {
-        return getValueFromObject(_obj[prop], props.join('.'));
+        if (_obj[prop]) {
+            return getValueFromObject(_obj[prop], props.join('.'));
+        } else {
+            log.error(`Unable to find [ ${dotProps} ] in dst file`);
+            return '';
+        }
     } else {
         return _obj;
     }
@@ -43,21 +48,25 @@ function transformReference(value: string, file: any) {
 
 function dstToJson(dstFilePath: string, fileName: string, destination: string = CURRENT_DIR) {
     const dstFile = getFile(dstFilePath);
+
     let _fileName = fileName;
+    let transformedFile;
 
     // $schema is no needed in the transformed file
     if (dstFile.$schema) {
         delete dstFile.$schema;
     }
 
-    if(fileName.endsWith(".json")){
+    if (fileName.endsWith('.json')) {
         _fileName = fileName.slice(0, -5);
     }
 
+    const FULL_DESTINATION = `${destination}${
+        destination.slice(-1) === '/' ? '' : '/'
+    }${_fileName}.json`;
 
-    fs.writeFileSync(
-        `${destination}/${_fileName}.json`,
-        JSON.stringify(
+    try {
+        transformedFile = JSON.stringify(
             dstFile,
             (_, value: any) => {
                 if (typeof value === 'string') {
@@ -67,8 +76,20 @@ function dstToJson(dstFilePath: string, fileName: string, destination: string = 
                 }
             },
             4
-        )
-    );
+        );
+
+        if (!fs.existsSync(FULL_DESTINATION)) {
+            fs.writeFileSync(FULL_DESTINATION, transformedFile);
+        } else {
+            throw Error(`File ${FULL_DESTINATION} already exist`);
+        }
+    } catch (e) {
+        if (e instanceof Error) {
+            log.error('Unable to transform dst file', e.message);
+        } else {
+            log.error('Error: ', e);
+        }
+    }
 }
 
 export { dstToJson };
