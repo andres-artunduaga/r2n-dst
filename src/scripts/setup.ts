@@ -5,15 +5,15 @@ import fs from 'fs-extra';
 import findupSync from 'findup-sync';
 import minimist from 'minimist';
 import { Logger } from '../utils/logger';
-
-// Constants
-const CURRENT_DIR = './';
-const DEFAULT_DST_DIR = 'dst';
-const DEFAULT_SCHEMA_DIR = `${DEFAULT_DST_DIR}/schema`;
-const DEFAULT_THEMES_DIR = `${DEFAULT_DST_DIR}/themes`;
-const DEFAULT_SCHEMA_FILE_NAME = getSchemaFileName();
-const DEFAULT_THEME = 'default';
-const DEFAULT_SCHEMA_FILE_PATH = `${DEFAULT_SCHEMA_DIR}/${DEFAULT_SCHEMA_FILE_NAME}`;
+import {
+    DEFAULT_SCHEMA_DIR,
+    DEFAULT_THEMES_DIR,
+    CURRENT_DIR,
+    DEFAULT_SCHEMA_FILE_PATH,
+    DEFAULT_SCHEMA_FILE_NAME,
+    DEFAULT_THEME,
+} from '../shared/constants';
+import { dstToJson } from './toJson';
 
 const log = new Logger();
 
@@ -21,19 +21,18 @@ function getThemeFileName(theme: string): string {
     return `${theme}.dst.json`;
 }
 
-function getSchemaFileName() {
-    return 'dst.schema.json';
-}
-
 /**
  * Creates the $schema path from where the theme file is created
  * @param {string} destination relative path to destination folder
  * @returns string
  */
- function getNodeSchemaPath(destination: string) {
+function getNodeSchemaPath(destination: string) {
     const NODE_MODULES_DIR_PATH = findupSync('node_modules', { cwd: path.resolve('./') });
     const R2N_DST_SCHEMA_PATH = '@r2n/dst/dist/dst/schema/dst.schema.json';
-    return path.relative(`${destination}/${DEFAULT_SCHEMA_DIR}`, `${NODE_MODULES_DIR_PATH}/${R2N_DST_SCHEMA_PATH}`);
+    return path.relative(
+        `${destination}/${DEFAULT_SCHEMA_DIR}`,
+        `${NODE_MODULES_DIR_PATH}/${R2N_DST_SCHEMA_PATH}`
+    );
 }
 
 function getThemeFilePath(theme: string): string {
@@ -92,15 +91,20 @@ function copySchema(destination: string = CURRENT_DIR) {
     }
 }
 
-function copyTheme(destination: string = CURRENT_DIR, theme: string = DEFAULT_THEME, schema?: boolean) {
+function copyTheme(
+    destination: string = CURRENT_DIR,
+    theme: string = DEFAULT_THEME,
+    schema?: boolean
+) {
     try {
         log.info('Copying theme...');
         const dest = getThemeDestinationPath(destination);
         createDir(dest);
         const themeObject = getThemeFileObj(theme);
         // TOOD: override data if necessary
-        if(!schema){ // Only override schema if schema is not copied
-            themeObject['$schema'] = getNodeSchemaPath(destination)
+        if (!schema) {
+            // Only override schema if schema is not copied
+            themeObject['$schema'] = getNodeSchemaPath(destination);
         }
         console.log(themeObject);
         if (themeObject) {

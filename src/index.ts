@@ -3,6 +3,7 @@
 import minimist from 'minimist';
 import { getHelpItems, HelpItem, showHelp } from './scripts/help';
 import { copySchema, copyTheme, setup } from './scripts/setup';
+import { dstToJson } from './scripts/toJson';
 import { Logger } from './utils/logger';
 
 const log = new Logger();
@@ -30,7 +31,8 @@ function validArgs(args: minimist.ParsedArgs): boolean {
 
 function main(): void {
     const args = minimist(process.argv);
-    const { init, help, theme, destination, schema } = args;
+    log.debug("ARGS", args);
+    const { init, help, theme, destination, schema, toJson, source, filename } = args;
     if (validArgs(args)) {
         if (help) {
             log.info('Using --help option, other flags will be ignored...');
@@ -50,6 +52,12 @@ function main(): void {
         }
         if (schema) {
             copySchema(destination);
+            log.success('Completed!');
+            return;
+        }
+
+        if(toJson){
+            dstToJson(source, filename);
             log.success('Completed!');
             return;
         }

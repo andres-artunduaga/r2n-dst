@@ -32,6 +32,21 @@ function getHelpItems(): HelpItem[] {
             options: '--theme',
             description: 'Add themes',
             usage: "r2ndst --theme default"
+        },
+        {
+            options: '--toJson',
+            description: 'generates a JSON file with the token definitions',
+            usage: "r2ndst --toJson --source ./awesomefile.dst.json --destination ./"
+        },
+        {
+            options: '--source',
+            description: 'indicates the source dst file',
+            usage: "r2ndst --toJson --source ./awesomefile.dst.json --destination ./"
+        },
+        {
+            options: '--filename',
+            description: 'Set the file name',
+            usage: "r2ndst --toJson --source ./awesomefile.dst.json --destination ./ --filename awesomefile"
         }
     ];
 }
