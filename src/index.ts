@@ -36,7 +36,7 @@ function main(): void {
 
     if (validArgs(args)) {
         if (help) {
-            log.info('Using --help option, other flags will be ignored...');
+            log.info('Using --help option, other args will be ignored...');
             showHelp();
             log.success('Completed!');
             return;
