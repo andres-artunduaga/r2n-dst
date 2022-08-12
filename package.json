@@ -1,6 +1,6 @@
 {
   "name": "@r2n/dst",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "R2N Design System Token Definitions",
   "bin": {
     "r2ndst": "dist/index.js"
@@ -10,7 +10,8 @@
     "prebuild": "yarn clean",
     "build": "tsc && cp -r dst dist/dst",
     "prepack": "yarn build",
-    "dst": "yarn build && node ./dist/index.js"
+    "dst": "yarn build && node ./dist/index.js",
+    "publish": "npm publish --acccess public"
   },
   "files": [
     "dist"
