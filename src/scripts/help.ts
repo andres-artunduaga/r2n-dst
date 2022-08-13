@@ -39,6 +39,16 @@ function getHelpItems(): HelpItem[] {
             usage: "r2ndst --toJson --source ./awesomefile.dst.json --destination ./"
         },
         {
+            options: '--toTs',
+            description: 'generates a TS file with the token definitions',
+            usage: "r2ndst --toTs --source ./dst/themes/default.dst.json --destination ."
+        },
+        {
+            options: '--toJs',
+            description: 'generates a JS file with the token definitions',
+            usage: "r2ndst --toJs --source ./dst/themes/default.dst.json --destination ."
+        },
+        {
             options: '--source',
             description: 'indicates the source dst file',
             usage: "r2ndst --toJson --source ./awesomefile.dst.json --destination ./"

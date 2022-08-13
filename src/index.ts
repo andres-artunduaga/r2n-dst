@@ -4,6 +4,7 @@ import minimist from 'minimist';
 import { getHelpItems, HelpItem, showHelp } from './scripts/help';
 import { copySchema, copyTheme, setup } from './scripts/setup';
 import { dstToJson } from './scripts/toJson';
+import DSTToTypescript from './scripts/toTs';
 import { Logger } from './utils/logger';
 
 const log = new Logger();
@@ -32,7 +33,7 @@ function validArgs(args: minimist.ParsedArgs): boolean {
 function main(): void {
     const args = minimist(process.argv);
 
-    const { init, help, theme, destination, schema, toJson, source, filename } = args;
+    const { init, help, theme, destination, schema, toJson, source, filename, toTs, toJs } = args;
 
     if (validArgs(args)) {
         if (help) {
@@ -57,8 +58,21 @@ function main(): void {
             return;
         }
 
-        if(toJson){
+        if (toJson) {
             dstToJson(source, filename);
+            log.success('Completed!');
+            return;
+        }
+
+        if (toTs) {
+            let DSTTransformer = new DSTToTypescript(source, destination, filename);
+            DSTTransformer.toTs();
+            log.success('Completed!');
+            return;
+        }
+        if (toJs) {
+            let DSTTransformer = new DSTToTypescript(source, destination, filename);
+            DSTTransformer.toJs();
             log.success('Completed!');
             return;
         }
